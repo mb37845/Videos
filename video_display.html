@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Display</title>
+</head>
+<body>
+    <h1 id="videoText"></h1>
+    
+    <iframe id="videoPlayer" width="560" height="315"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+    <script>
+        // Function to get query parameters by name
+        function getQueryParam(name) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Get the 'url' and 'text' parameters
+        var videoUrl = getQueryParam('url');
+        var videoText = getQueryParam('text');
+
+        // Use the extracted parameters in the page
+        if (videoUrl && videoText) {
+            document.getElementById('videoText').textContent = videoText;
+            const valid_videoUrl = videoUrl.replace('watch?v=', 'embed/');
+            document.getElementById('videoPlayer').src = valid_videoUrl;
+           
+        } else {
+            console.error('Missing required parameters: url or text');
+        }
+    </script>
+</body>
+</html>
